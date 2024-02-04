@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "76825465813",
+    "project_id": "excessfood-76923",
+    "storage_bucket": "excessfood-76923.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76825465813:android:e9cb7d46b9b8da54cbe35c",
+        "android_client_info": {
+          "package_name": "com.example.excessfood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcJOKiTMkzo3XH-DTGfoVmAS7jqflZsVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
