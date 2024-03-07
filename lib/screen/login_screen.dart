@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:excessfood/auth/auth_methods.dart';
-import 'package:excessfood/indexPage.dart';
 import 'package:excessfood/main.dart';
 import 'package:excessfood/screen/signup_screen.dart';
 import 'package:excessfood/utils/utils.dart';
@@ -35,7 +34,7 @@ class _loginscreenState extends State<loginscreen> {
     if (results == 'succes') {
       Navigator.popUntil(context, (route) => route.isFirst);
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) => MyApp()));
+          .pushReplacement(MaterialPageRoute(builder: (context) => const MyApp()));
     } else {
       showSnakBar(results, context);
     }
@@ -48,7 +47,7 @@ class _loginscreenState extends State<loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFc3dbf4),
+      backgroundColor: const Color(0xFFc3dbf4),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
@@ -64,14 +63,14 @@ class _loginscreenState extends State<loginscreen> {
                 const SizedBox(height: 60),
                 TextField(
                   controller: _email,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none, hintText: 'mail id'),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   obscureText: true,
                   controller: _pass,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none, hintText: 'password'),
                 ),
                 const SizedBox(height: 16),

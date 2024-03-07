@@ -1,20 +1,21 @@
-// ignore_for_file: prefer_const_constructors, body_might_complete_normally_nullable, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
+import 'package:excessfood/screen/agent/view_posts.dart';
 import 'package:excessfood/screen/event/upload_food.dart';
-import 'package:excessfood/screen/event/view_posts.dart';
+import 'package:excessfood/screen/safety/view_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
 
-class UserIndexPage extends StatefulWidget {
-  const UserIndexPage({super.key});
+class AgentIndexPage extends StatefulWidget {
+  const AgentIndexPage({super.key});
 
   @override
-  State<UserIndexPage> createState() => _UserIndexPageState();
+  State<AgentIndexPage> createState() => _AgentIndexPageState();
 }
 
-class _UserIndexPageState extends State<UserIndexPage> {
+class _AgentIndexPageState extends State<AgentIndexPage> {
   int index = 0;
   List<dynamic> tabs = [
     ViewFoodOrders(),

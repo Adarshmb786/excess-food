@@ -1,4 +1,5 @@
 import 'package:excessfood/admin_page.dart';
+import 'package:excessfood/agent_page.dart';
 import 'package:excessfood/delivery_page.dart';
 import 'package:excessfood/foodsecurity_page.dart';
 import 'package:excessfood/user_page.dart';
@@ -16,15 +17,18 @@ class IndexPage extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     final userModel = userProvider.userModel;
     if (userModel!.type == "admin") {
-      return AdminIndexPage();
+      return const AdminIndexPage();
     } else {
       if (userModel.type == "foodsecurity") {
-        return FoodSecIndexPage();
+        return const FoodSecIndexPage();
       } else {
         if (userModel.type == "delivery") {
-          return DeliveryIndexPage();
+          return const DeliveryIndexPage();
         } else {
-          return UserIndexPage();
+          if (userModel.type == "agent") {
+            return const AgentIndexPage();
+          }
+          return const UserIndexPage();
         }
       }
     }
