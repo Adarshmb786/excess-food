@@ -5,7 +5,6 @@ import 'package:excessfood/screen/event/edit_page.dart';
 import 'package:excessfood/utils/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class OrdersBox extends StatelessWidget {
@@ -49,7 +48,7 @@ class OrdersBox extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color.fromARGB(255, 236, 236, 236),
                         spreadRadius: 3,
@@ -84,28 +83,11 @@ class OrdersBox extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(snap['username']),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        location,
-                                        style: TextStyle(
-                                          color: Colors.black38,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: food['verified'] == 'verified'
-                                            ? Image(
-                                                image: AssetImage(
-                                                    'assets/shield.png'),
-                                              )
-                                            : Image(
-                                                image: AssetImage(
-                                                    'assets/warning.png'),
-                                              ),
-                                      ),
-                                    ],
+                                  Text(
+                                    location,
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -116,7 +98,7 @@ class OrdersBox extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      Container(
+                      SizedBox(
                         height: 400,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
@@ -133,9 +115,28 @@ class OrdersBox extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      ExpandableShowMoreWidget(
-                        text: description,
-                        height: 80,
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Text(food['foodName']),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: food['verified'] == 'verified'
+                                    ? Image(
+                                        image: AssetImage('assets/shield.png'),
+                                      )
+                                    : Image(
+                                        image: AssetImage('assets/warning.png'),
+                                      ),
+                              ),
+                            ],
+                          ),
+                          ExpandableShowMoreWidget(
+                            text: description,
+                            height: 80,
+                          ),
+                        ],
                       ),
                     ],
                   ),

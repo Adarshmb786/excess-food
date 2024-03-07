@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:excessfood/screen/agent/view_orders.dart';
 import 'package:excessfood/screen/agent/view_posts.dart';
-import 'package:excessfood/screen/event/upload_food.dart';
-import 'package:excessfood/screen/safety/view_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';
 import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
@@ -18,8 +18,8 @@ class AgentIndexPage extends StatefulWidget {
 class _AgentIndexPageState extends State<AgentIndexPage> {
   int index = 0;
   List<dynamic> tabs = [
+    ViewAvailableFoods(),
     ViewFoodOrders(),
-    UploadFood(),
   ];
 
   List<QudsPopupMenuBase> getMenuItems() {
@@ -57,8 +57,8 @@ class _AgentIndexPageState extends State<AgentIndexPage> {
               filledIcon: Icons.fastfood,
               outlinedIcon: Icons.fastfood_outlined),
           BarItem(
-            filledIcon: Icons.add,
-            outlinedIcon: Icons.add,
+            filledIcon: CupertinoIcons.bag_fill,
+            outlinedIcon: CupertinoIcons.bag,
           ),
         ],
       ),

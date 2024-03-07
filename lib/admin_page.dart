@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:excessfood/screen/admin/view_posts.dart';
+import 'package:excessfood/screen/admin/add_agent.dart';
 import 'package:excessfood/screen/event/upload_food.dart';
 import 'package:excessfood/screen/event/view_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,8 +19,8 @@ class AdminIndexPage extends StatefulWidget {
 class _AdmiIndexnPageState extends State<AdminIndexPage> {
   int index = 0;
   List<dynamic> tabs = [
-    ViewFoodOrders(),
-    UploadFood(),
+    AdminViewFoodOrders(),
+    AddAgent(),
   ];
 
   List<QudsPopupMenuBase> getMenuItems() {

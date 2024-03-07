@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:excessfood/screen/safety/evaluate_post.dart';
+import 'package:excessfood/screen/agent/order_food.dart';
 import 'package:excessfood/utils/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class SafetyOrdersBox extends StatelessWidget {
-  SafetyOrdersBox({super.key, required this.food});
+class OrdersBox extends StatelessWidget {
+  OrdersBox({super.key, required this.food});
 
   final Map<String, dynamic> food;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -21,9 +20,9 @@ class SafetyOrdersBox extends StatelessWidget {
     String location = food['location'];
     String imageurl = food['imageUrl'];
     String description = food['description'];
-    CollectionReference users = _firestore.collection('foods');
+    CollectionReference users = _firestore.collection('users');
     return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(food['postId']).get(),
+      future: users.doc(name).get(),
       builder: (((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
@@ -31,6 +30,7 @@ class SafetyOrdersBox extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> snap =
               snapshot.data!.data() as Map<String, dynamic>;
+
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(
@@ -58,6 +58,7 @@ class SafetyOrdersBox extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,8 +70,7 @@ class SafetyOrdersBox extends StatelessWidget {
                                 child: ClipOval(
                                   child: FadeInImage.memoryNetwork(
                                     placeholder: kTransparentImage,
-                                    image:
-                                        'https://imgs.search.brave.com/2jyXoya-fT0S5N_FXhXfRtPpXev9lAVqDEB9GF6N72U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNTA4/ODc4NjQ0L3Bob3Rv/L21lYXQtcGlsYWYu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PXNYUHBVblRvV0Fj/TS1HdEpFMmhvWVIz/S085ZUJyTVZDNXMt/SWhfSDR1czg9',
+                                    image: snap['photourl'],
                                     fit: BoxFit.cover,
                                     width: 36,
                                     height: 36,
@@ -83,7 +83,7 @@ class SafetyOrdersBox extends StatelessWidget {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(name),
+                                  Text(snap['username']),
                                   Text(
                                     location,
                                     style: TextStyle(
@@ -116,9 +116,37 @@ class SafetyOrdersBox extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      ExpandableShowMoreWidget(
-                        text: description,
-                        height: 80,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(food['foodName']),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: food['verified'] == 'verified'
+                                    ? Image(
+                                        image: AssetImage('assets/shield.png'),
+                                      )
+                                    : Image(
+                                        image: AssetImage('assets/warning.png'),
+                                      ),
+                              ),
+                              Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.greenAccent[700],
+                                  ),
+                                  margin: const EdgeInsets.only(left: 8.0),
+                                  child: Text(food['status'])),
+                            ],
+                          ),
+                          ExpandableShowMoreWidget(
+                            text: description,
+                            height: 80,
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -130,12 +158,5 @@ class SafetyOrdersBox extends StatelessWidget {
         return CircularProgressIndicator();
       })),
     );
-  }
-
-  String formatFirebaseTimestamp(Timestamp timestamp) {
-    DateTime dateTime = timestamp.toDate();
-    final dateFormat = DateFormat('d-MMM-y h:mm a');
-    String formattedDate = dateFormat.format(dateTime);
-    return formattedDate;
   }
 }

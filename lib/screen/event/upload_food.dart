@@ -88,16 +88,22 @@ class _UploadFoodState extends State<UploadFood> {
               GestureDetector(
                 onTap: _getImage,
                 child: _image != null
-                    ? Image.file(
-                        _image!,
-                        height: 150,
-                        width: 150,
-                        fit: BoxFit.cover,
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          _image!,
+                          height: 250,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       )
                     : Container(
-                        height: 150,
-                        width: 150,
-                        color: Colors.grey[300],
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[300],
+                        ),
+                        height: 250,
+                        width: double.infinity,
                         child: Icon(
                           Icons.camera_alt,
                           size: 50,
@@ -108,17 +114,20 @@ class _UploadFoodState extends State<UploadFood> {
               SizedBox(height: 16),
               TextField(
                 controller: _titleController,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: InputDecoration(
+                    border: InputBorder.none, labelText: 'Title'),
               ),
               SizedBox(height: 16),
               TextField(
                 controller: _locationController,
-                decoration: InputDecoration(labelText: 'Location'),
+                decoration: InputDecoration(
+                    border: InputBorder.none, labelText: 'Location'),
               ),
               SizedBox(height: 16),
               TextField(
                 controller: _descriptionController,
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(
+                    border: InputBorder.none, labelText: 'Description'),
                 maxLines: 3,
               ),
               SizedBox(height: 32),
@@ -140,8 +149,8 @@ class _UploadFoodState extends State<UploadFood> {
                       )
                     : Center(
                         child: const Text(
-                          'Add food',
-                          style: TextStyle(color: Colors.white),
+                          'Add food 🍉',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
               ),

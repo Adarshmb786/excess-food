@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:excessfood/screen/event/orders_box.dart';
+import 'package:excessfood/screen/agent/orders_box.dart';
 import 'package:flutter/material.dart';
 
-class ViewFoodOrders extends StatelessWidget {
-  const ViewFoodOrders({
+class ViewAvailableFoods extends StatelessWidget {
+  const ViewAvailableFoods({
     Key? key,
   }) : super(key: key);
 

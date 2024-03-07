@@ -30,7 +30,7 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
 
     try {
       await firestore.collection('foods').doc(widget.food['postId']).update({
-        'status': 'interested',
+        'status': 'ordered',
         'orderedBy': user.uid,
       });
     } catch (e) {
@@ -53,44 +53,69 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              widget.food['imageUrl'],
-              height: 150,
-              width: 150,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                widget.food['imageUrl'],
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(height: 16),
-            Text(widget.food['foodName']),
+            Text(
+              widget.food['foodName'],
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 16),
-            Text(widget.food['location']),
+            Text(
+              widget.food['location'],
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             SizedBox(height: 16),
-            Text(widget.food['description']),
+            Text(
+              widget.food['description'],
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
             SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () async {
-                await ApproveFood();
-                showTopSnackBar(
-                  Overlay.of(context),
-                  CustomSnackBar.success(
-                    message: "Success. Food is approved",
-                  ),
-                );
-                Navigator.of(context).pop();
-              },
-              child: _isloading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    )
-                  : Center(
-                      child: const Text(
-                        'Order Food',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.all(10),
+        height: 80,
+        child: ElevatedButton(
+          onPressed: () async {
+            await ApproveFood();
+            showTopSnackBar(
+              Overlay.of(context),
+              CustomSnackBar.success(
+                message: "Success. Food is approved",
+              ),
+            );
+            Navigator.of(context).pop();
+          },
+          child: _isloading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                )
+              : Center(
+                  child: const Text(
+                    'Order Food',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
         ),
       ),
     );

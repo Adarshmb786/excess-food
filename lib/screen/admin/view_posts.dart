@@ -1,23 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:excessfood/screen/safety/orders_box.dart';
+import 'package:excessfood/screen/admin/orders_box.dart';
 import 'package:flutter/material.dart';
 
-class ViewUnverifiedFoodOrders extends StatelessWidget {
-  const ViewUnverifiedFoodOrders({
+class AdminViewFoodOrders extends StatelessWidget {
+  const AdminViewFoodOrders({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final userProvider = Provider.of<UserProvider>(context);
-    // final userModel = userProvider.userModel;
-
     return Scaffold(
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance
-            .collection('foods')
-            .where('verified', isEqualTo: 'not verified')
-            .snapshots(),
+        stream: FirebaseFirestore.instance.collection('foods').snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -33,12 +27,13 @@ class ViewUnverifiedFoodOrders extends StatelessWidget {
               child: Text('No orders found.'),
             );
           } else {
+            print(snapshot.data!.docs);
             final bookings = snapshot.data!.docs;
             return ListView.builder(
               itemCount: bookings.length,
               itemBuilder: (BuildContext context, int index) {
                 final booking = bookings[index].data();
-                return SafetyOrdersBox(
+                return OrdersBox(
                   food: booking,
                 );
               },

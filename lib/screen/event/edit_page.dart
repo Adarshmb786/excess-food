@@ -136,35 +136,57 @@ class _PreviewPageState extends State<PreviewPage> {
               GestureDetector(
                   onTap: _getImage,
                   child: _image != null
-                      ? Image.file(
-                          _image!,
-                          height: 150,
-                          width: 150,
-                          fit: BoxFit.cover,
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(
+                            _image!,
+                            height: 250,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
                         )
-                      : Image.network(
-                          widget.food['imageUrl'],
-                          height: 150,
-                          width: 150,
-                          fit: BoxFit.cover,
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            widget.food['imageUrl'],
+                            height: 250,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
                         )),
               SizedBox(height: 16),
               TextField(
                 controller: _titleController,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
                 decoration: InputDecoration(
+                  border: InputBorder.none,
                   hintText: widget.food['foodName'],
                 ),
               ),
               SizedBox(height: 16),
               TextField(
                 controller: _locationController,
-                decoration: InputDecoration(hintText: widget.food['location']),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: widget.food['location']),
               ),
               SizedBox(height: 16),
               TextField(
                 controller: _descriptionController,
-                decoration:
-                    InputDecoration(hintText: widget.food['description']),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w300,
+                ),
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: widget.food['description']),
                 maxLines: 3,
               ),
               SizedBox(height: 32),

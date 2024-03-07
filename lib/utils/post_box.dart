@@ -24,7 +24,7 @@ class PostBox extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromARGB(255, 236, 236, 236),
                 spreadRadius: 3,
@@ -53,7 +53,7 @@ class PostBox extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Column(
@@ -62,7 +62,7 @@ class PostBox extends StatelessWidget {
                           Text(name),
                           Text(
                             location,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black38,
                             ),
                           ),
@@ -72,10 +72,10 @@ class PostBox extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              Container(
+              SizedBox(
                 height: 400,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
@@ -86,10 +86,10 @@ class PostBox extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               ExpandableShowMoreWidget(

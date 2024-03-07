@@ -52,18 +52,39 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              widget.food['imageUrl'],
-              height: 150,
-              width: 150,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                widget.food['imageUrl'],
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
             SizedBox(height: 16),
-            Text(widget.food['foodName']),
+            Text(
+              widget.food['foodName'],
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             SizedBox(height: 16),
-            Text(widget.food['location']),
+            Text(
+              widget.food['location'],
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             SizedBox(height: 16),
-            Text(widget.food['description']),
+            Text(
+              widget.food['description'],
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: () async {
