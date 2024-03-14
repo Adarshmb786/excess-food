@@ -31,6 +31,7 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
     try {
       await firestore.collection('foods').doc(widget.food['postId']).update({
         'status': 'pickup',
+        'pickupBy': user.uid,
       });
     } catch (e) {
       print(e.toString());

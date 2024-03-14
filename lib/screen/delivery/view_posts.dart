@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excessfood/screen/delivery/pickup_food.dart';
-import 'package:excessfood/screen/event/orders_box.dart';
 import 'package:flutter/material.dart';
 
 class ViewFoodOrdersForDelivery extends StatelessWidget {

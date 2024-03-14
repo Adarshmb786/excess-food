@@ -125,7 +125,7 @@ class _PreviewPageState extends State<PreviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Image'),
+        title: Text('Edit Post'),
       ),
       body: SingleChildScrollView(
         child: Padding(

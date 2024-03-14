@@ -2,8 +2,6 @@
 
 import 'package:excessfood/screen/admin/view_posts.dart';
 import 'package:excessfood/screen/admin/add_agent.dart';
-import 'package:excessfood/screen/event/upload_food.dart';
-import 'package:excessfood/screen/event/view_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';

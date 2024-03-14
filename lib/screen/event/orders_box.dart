@@ -58,9 +58,10 @@ class OrdersBox extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Row(
                             children: [
@@ -116,20 +117,30 @@ class OrdersBox extends StatelessWidget {
                         height: 16,
                       ),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
                               Text(food['foodName']),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: food['verified'] == 'verified'
-                                    ? Image(
-                                        image: AssetImage('assets/shield.png'),
-                                      )
-                                    : Image(
-                                        image: AssetImage('assets/warning.png'),
-                                      ),
-                              ),
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: food['verified'] == 'verified'
+                                      ? Image(
+                                          image:
+                                              AssetImage('assets/shield.png'),
+                                        )
+                                      : food['verified'] == 'verified'
+                                          ? Image(
+                                              image: AssetImage(
+                                                  'assets/warning.png'),
+                                            )
+                                          : SizedBox(
+                                              height: 20,
+                                              child: Image(
+                                                image: AssetImage(
+                                                    'assets/reject.png'),
+                                              ),
+                                            )),
                             ],
                           ),
                           ExpandableShowMoreWidget(

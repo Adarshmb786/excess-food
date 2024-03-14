@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excessfood/auth/user_provider.dart';
-import 'package:excessfood/screen/event/orders_box.dart';
+import 'package:excessfood/screen/delivery/orders_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ViewFoodOrders extends StatelessWidget {
-  const ViewFoodOrders({
+class ViewFoodOrdersDelivery extends StatelessWidget {
+  const ViewFoodOrdersDelivery({
     Key? key,
   }) : super(key: key);
 
@@ -13,13 +13,12 @@ class ViewFoodOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userModel = userProvider.userModel;
-    print(userModel!.uid);
 
     return Scaffold(
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('foods')
-            .where('userId', isEqualTo: userModel!.uid)
+            .where('pickupBy', isEqualTo: userModel!.uid)
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -41,7 +40,7 @@ class ViewFoodOrders extends StatelessWidget {
               itemCount: bookings.length,
               itemBuilder: (BuildContext context, int index) {
                 final booking = bookings[index].data();
-                return OrdersBox(
+                return OrdersBoxDelivery(
                   food: booking,
                 );
               },

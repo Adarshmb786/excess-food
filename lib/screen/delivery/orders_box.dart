@@ -1,15 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:excessfood/screen/safety/evaluate_post.dart';
+import 'package:excessfood/screen/agent/order_food.dart';
 import 'package:excessfood/utils/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class SafetyOrdersBox extends StatelessWidget {
-  SafetyOrdersBox({super.key, required this.food});
+class OrdersBoxDelivery extends StatelessWidget {
+  OrdersBoxDelivery({super.key, required this.food});
 
   final Map<String, dynamic> food;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -23,7 +22,7 @@ class SafetyOrdersBox extends StatelessWidget {
     String description = food['description'];
     CollectionReference users = _firestore.collection('users');
     return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(food['userId']).get(),
+      future: users.doc(name).get(),
       builder: (((context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center();
@@ -31,6 +30,7 @@ class SafetyOrdersBox extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> snap =
               snapshot.data!.data() as Map<String, dynamic>;
+
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(
@@ -61,7 +61,7 @@ class SafetyOrdersBox extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
@@ -132,6 +132,14 @@ class SafetyOrdersBox extends StatelessWidget {
                                         image: AssetImage('assets/warning.png'),
                                       ),
                               ),
+                              Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.greenAccent[700],
+                                  ),
+                                  margin: const EdgeInsets.only(left: 8.0),
+                                  child: Text(food['status'])),
                             ],
                           ),
                           ExpandableShowMoreWidget(
@@ -150,12 +158,5 @@ class SafetyOrdersBox extends StatelessWidget {
         return CircularProgressIndicator();
       })),
     );
-  }
-
-  String formatFirebaseTimestamp(Timestamp timestamp) {
-    DateTime dateTime = timestamp.toDate();
-    final dateFormat = DateFormat('d-MMM-y h:mm a');
-    String formattedDate = dateFormat.format(dateTime);
-    return formattedDate;
   }
 }

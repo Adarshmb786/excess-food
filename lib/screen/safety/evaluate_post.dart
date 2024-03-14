@@ -135,6 +135,13 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
                 ElevatedButton(
                   onPressed: () async {
                     await RejectFood();
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.error(
+                        message: "Success. Food is Rejected",
+                      ),
+                    );
+                    Navigator.of(context).pop();
                   },
                   child: _isloading
                       ? const Center(
