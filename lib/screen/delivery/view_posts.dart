@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:excessfood/screen/delivery/pickup_food.dart';
+import 'package:excessfood/screen/delivery/orders_box.dart';
 import 'package:flutter/material.dart';
 
 class ViewFoodOrdersForDelivery extends StatelessWidget {
@@ -13,7 +13,7 @@ class ViewFoodOrdersForDelivery extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('foods')
-            .where('status', isEqualTo: 'available')
+            .where('status', isEqualTo: 'ordered')
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -36,7 +36,7 @@ class ViewFoodOrdersForDelivery extends StatelessWidget {
               itemCount: bookings.length,
               itemBuilder: (BuildContext context, int index) {
                 final booking = bookings[index].data();
-                return EvaluateFoodPage(
+                return OrdersBoxDelivery(
                   food: booking,
                 );
               },

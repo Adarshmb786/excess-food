@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, avoid_print, library_private_types_in_public_api
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, avoid_print, library_private_types_in_public_api, non_constant_identifier_names
 
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +22,7 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
 
   bool _isloading = false;
 
-  Future ApproveFood() async {
+  Future OrderFood() async {
     setState(() {
       _isloading = true;
     });
@@ -95,7 +95,7 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
         height: 80,
         child: ElevatedButton(
           onPressed: () async {
-            await ApproveFood();
+            await OrderFood();
             showTopSnackBar(
               Overlay.of(context),
               CustomSnackBar.success(

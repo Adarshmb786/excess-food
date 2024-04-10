@@ -44,74 +44,77 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Delivery Pickup Confirmation'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                widget.food['imageUrl'],
-                height: 250,
-                width: double.infinity,
-                fit: BoxFit.cover,
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Delivery Pickup Confirmation'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  widget.food['imageUrl'],
+                  height: 250,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              widget.food['foodName'],
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+              SizedBox(height: 16),
+              Text(
+                widget.food['foodName'],
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              widget.food['location'],
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+              SizedBox(height: 16),
+              Text(
+                widget.food['location'],
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              widget.food['description'],
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w300,
+              SizedBox(height: 16),
+              Text(
+                widget.food['description'],
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
-            ),
-            SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () async {
-                await ApproveFood();
-                showTopSnackBar(
-                  Overlay.of(context),
-                  CustomSnackBar.success(
-                    message: "Success. Food is approved",
-                  ),
-                );
-                Navigator.of(context).pop();
-              },
-              child: _isloading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    )
-                  : Center(
-                      child: const Text(
-                        'Take Order',
-                        style: TextStyle(color: Colors.black),
-                      ),
+              SizedBox(height: 32),
+              ElevatedButton(
+                onPressed: () async {
+                  await ApproveFood();
+                  showTopSnackBar(
+                    Overlay.of(context),
+                    CustomSnackBar.success(
+                      message: "Success. Food is approved",
                     ),
-            ),
-          ],
+                  );
+                  Navigator.of(context).pop();
+                },
+                child: _isloading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.black,
+                        ),
+                      )
+                    : Center(
+                        child: const Text(
+                          'Take Order',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+              ),
+            ],
+          ),
         ),
       ),
     );

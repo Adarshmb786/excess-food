@@ -13,12 +13,12 @@ class ViewFoodOrdersDelivery extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userModel = userProvider.userModel;
-
+    print(userModel!.uid);
     return Scaffold(
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('foods')
-            .where('pickupBy', isEqualTo: userModel!.uid)
+            .where('pickupBy', isEqualTo: userModel.uid)
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -40,6 +40,7 @@ class ViewFoodOrdersDelivery extends StatelessWidget {
               itemCount: bookings.length,
               itemBuilder: (BuildContext context, int index) {
                 final booking = bookings[index].data();
+                print(booking);
                 return OrdersBoxDelivery(
                   food: booking,
                 );

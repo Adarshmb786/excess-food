@@ -63,7 +63,7 @@ class _AgentIndexPageState extends State<AgentIndexPage> {
         ],
       ),
       appBar: AppBar(
-        title: const Text('Hello 👋'),
+        title: const Text('Hello Agent👋'),
         actions: [
           QudsPopupButton(
               tooltip: 'T', items: getMenuItems(), child: Icon(Icons.menu)),

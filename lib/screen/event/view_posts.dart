@@ -19,7 +19,7 @@ class ViewFoodOrders extends StatelessWidget {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
             .collection('foods')
-            .where('userId', isEqualTo: userModel!.uid)
+            .where('userId', isEqualTo: userModel.uid)
             .snapshots(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {

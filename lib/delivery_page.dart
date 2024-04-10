@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:excessfood/screen/agent/view_orders.dart';
+import 'package:excessfood/screen/delivery/view_orders.dart';
 import 'package:excessfood/screen/delivery/view_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class _DeliveryIndexPageState extends State<DeliveryIndexPage> {
   int index = 0;
   List<dynamic> tabs = [
     ViewFoodOrdersForDelivery(),
-    ViewFoodOrders(),
+    ViewFoodOrdersDelivery(),
   ];
 
   List<QudsPopupMenuBase> getMenuItems() {
@@ -62,7 +62,7 @@ class _DeliveryIndexPageState extends State<DeliveryIndexPage> {
         ],
       ),
       appBar: AppBar(
-        title: const Text('Hello 👋'),
+        title: const Text('Hello Delivery👋'),
         actions: [
           QudsPopupButton(
               tooltip: 'T', items: getMenuItems(), child: Icon(Icons.menu)),
