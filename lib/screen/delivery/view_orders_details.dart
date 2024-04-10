@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:excessfood/screen/agent/ordered_food_details.dart';
+import 'package:excessfood/screen/delivery/pickup_food.dart';
 import 'package:excessfood/utils/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class ViewOrdersPage extends StatelessWidget {
-  ViewOrdersPage({super.key, required this.food});
+class OrdersBoxDeliveryDetails extends StatelessWidget {
+  OrdersBoxDeliveryDetails({super.key, required this.food});
 
   final Map<String, dynamic> food;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -32,16 +32,7 @@ class ViewOrdersPage extends StatelessWidget {
               snapshot.data!.data() as Map<String, dynamic>;
 
           return GestureDetector(
-            onTap: () {
-              print(food);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => OrderedFoodDetails(
-                    food: food,
-                  ),
-                ),
-              );
-            },
+            onTap: () {},
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:excessfood/auth/user_provider.dart';
 import 'package:excessfood/screen/delivery/orders_box.dart';
+import 'package:excessfood/screen/delivery/view_orders_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class ViewFoodOrdersDelivery extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 final booking = bookings[index].data();
                 print(booking);
-                return OrdersBoxDelivery(
+                return OrdersBoxDeliveryDetails(
                   food: booking,
                 );
               },

@@ -60,6 +60,7 @@ class _UploadFoodState extends State<UploadFood> {
         'location': _locationController.text,
         'description': _descriptionController.text,
         'time': DateTime.now(),
+        'pickupBy': '',
         'verified': 'not verified',
         'status': 'available',
         'orderedBy': '',

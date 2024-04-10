@@ -33,7 +33,7 @@ class ViewFoodOrders extends StatelessWidget {
             );
           } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(
-              child: Text('No orders found.'),
+              child: Text('You haven\'t uploaded any food.'),
             );
           } else {
             final bookings = snapshot.data!.docs;

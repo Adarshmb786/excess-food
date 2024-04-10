@@ -17,8 +17,8 @@ class UserIndexPage extends StatefulWidget {
 class _UserIndexPageState extends State<UserIndexPage> {
   int index = 0;
   List<dynamic> tabs = [
-    ViewFoodOrders(),
     UploadFood(),
+    ViewFoodOrders(),
   ];
 
   List<QudsPopupMenuBase> getMenuItems() {
@@ -62,7 +62,7 @@ class _UserIndexPageState extends State<UserIndexPage> {
         ],
       ),
       appBar: AppBar(
-        title: const Text('Hello 👋'),
+        title: const Text('Hello Event👋'),
         actions: [
           QudsPopupButton(
               tooltip: 'T', items: getMenuItems(), child: Icon(Icons.menu)),

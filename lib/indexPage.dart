@@ -2,7 +2,7 @@ import 'package:excessfood/admin_page.dart';
 import 'package:excessfood/agent_page.dart';
 import 'package:excessfood/delivery_page.dart';
 import 'package:excessfood/foodsecurity_page.dart';
-import 'package:excessfood/user_page.dart';
+import 'package:excessfood/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
