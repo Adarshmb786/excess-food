@@ -58,9 +58,6 @@ class _PreviewPageState extends State<PreviewPage> {
       urlDownload = await snapshot.ref.getDownloadURL();
     }
     try {
-      print("_titleController.text");
-      print(_titleController.text);
-      print("_titleController.text");
       await firestore.collection('foods').doc(widget.food['postId']).update({
         'postId': widget.food['postId'],
         'imageUrl': urlDownload != '' ? urlDownload : widget.food['imageUrl'],
@@ -74,8 +71,6 @@ class _PreviewPageState extends State<PreviewPage> {
         'description': _descriptionController.text != ''
             ? _descriptionController.text
             : widget.food['description'],
-        // 'time': DateTime.now(),
-        'status': 'Not verified',
       });
     } catch (e) {
       print(e.toString());

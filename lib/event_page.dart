@@ -53,12 +53,12 @@ class _UserIndexPageState extends State<UserIndexPage> {
         selectedIndex: index,
         barItems: [
           BarItem(
-              filledIcon: Icons.fastfood,
-              outlinedIcon: Icons.fastfood_outlined),
-          BarItem(
             filledIcon: Icons.add,
             outlinedIcon: Icons.add,
           ),
+          BarItem(
+              filledIcon: Icons.fastfood,
+              outlinedIcon: Icons.fastfood_outlined),
         ],
       ),
       appBar: AppBar(

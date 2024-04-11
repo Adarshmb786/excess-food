@@ -27,7 +27,7 @@ class ViewAvailableFoods extends StatelessWidget {
             );
           } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(
-              child: Text('No orders found.'),
+              child: Text('No Foods available.'),
             );
           } else {
             print(snapshot.data!.docs);

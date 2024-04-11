@@ -62,7 +62,7 @@ class _AdmiIndexnPageState extends State<AdminIndexPage> {
         ],
       ),
       appBar: AppBar(
-        title: const Text('Hello 👋'),
+        title: const Text('Hello Admin 👋'),
         actions: [
           QudsPopupButton(
               tooltip: 'T', items: getMenuItems(), child: Icon(Icons.menu)),
