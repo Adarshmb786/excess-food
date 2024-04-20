@@ -129,18 +129,32 @@ class ViewOrdersPage extends StatelessWidget {
                                     ? Image(
                                         image: AssetImage('assets/shield.png'),
                                       )
-                                    : Image(
-                                        image: AssetImage('assets/warning.png'),
-                                      ),
+                                    : food['verified'] == 'rejected'
+                                        ? Container(
+                                            height: 30,
+                                            child: Image(
+                                              image: AssetImage(
+                                                  'assets/reject.png'),
+                                            ),
+                                          )
+                                        : Image(
+                                            image: AssetImage(
+                                                'assets/warning.png'),
+                                          ),
                               ),
                               Container(
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.greenAccent[700],
-                                  ),
-                                  margin: const EdgeInsets.only(left: 8.0),
-                                  child: Text(food['status'])),
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: food['verified'] == 'rejected'
+                                      ? Colors.redAccent[700]
+                                      : Colors.greenAccent[700],
+                                ),
+                                margin: const EdgeInsets.only(left: 8.0),
+                                child: food['verified'] == 'rejected'
+                                    ? Text(food['verified'])
+                                    : Text(food['status']),
+                              ),
                             ],
                           ),
                           ExpandableShowMoreWidget(

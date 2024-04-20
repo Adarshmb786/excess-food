@@ -136,8 +136,11 @@ class _OrderedFoodDetailsState extends State<OrderedFoodDetails> {
                                         image:
                                             AssetImage('assets/delivery.gif')),
                                   ),
-                                  const Text(
-                                      'Picked your order. It will reach you shortly.'),
+                                  widget.food['verified'] == "rejected"
+                                      ? const Text(
+                                          'Food failed quality test. Check other foods.')
+                                      : const Text(
+                                          'Picked your order. It will reach you shortly.'),
                                   const SizedBox(height: 5),
                                   Text('📞+91 ${snap["phone"]}'),
                                 ],
@@ -165,27 +168,32 @@ class _OrderedFoodDetailsState extends State<OrderedFoodDetails> {
           ),
         ),
         bottomNavigationBar: !widget.food.containsKey('mainFoodimageUrl')
-            ? Container(
-                padding: const EdgeInsets.all(10),
-                height: 80,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AddProof(
-                          foodId: widget.food['postId'],
+            ? widget.food['verified'] == "rejected"
+                ? const SizedBox(
+                    height: 20,
+                    child: Center(child: Text('')),
+                  )
+                : Container(
+                    padding: const EdgeInsets.all(10),
+                    height: 80,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AddProof(
+                              foodId: widget.food['postId'],
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Center(
+                        child: Text(
+                          'Add photos',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
-                    );
-                  },
-                  child: const Center(
-                    child: Text(
-                      'Add photos',
-                      style: TextStyle(color: Colors.black),
                     ),
-                  ),
-                ),
-              )
+                  )
             : const SizedBox(
                 height: 20,
                 child: Center(child: Text('')),

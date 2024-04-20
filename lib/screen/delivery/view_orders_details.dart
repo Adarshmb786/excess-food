@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:excessfood/screen/safety/evaluate_post.dart';
 import 'package:excessfood/utils/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,15 @@ class OrdersBoxDeliveryDetails extends StatelessWidget {
               snapshot.data!.data() as Map<String, dynamic>;
 
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EvaluateFoodPage(
+                    food: food,
+                  ),
+                ),
+              );
+            },
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
@@ -114,23 +123,36 @@ class OrdersBoxDeliveryDetails extends StatelessWidget {
                             children: [
                               Text(food['foodName']),
                               Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: food['verified'] == 'verified'
-                                    ? Image(
-                                        image: AssetImage('assets/shield.png'),
-                                      )
-                                    : Image(
-                                        image: AssetImage('assets/warning.png'),
-                                      ),
-                              ),
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: food['verified'] == 'verified'
+                                      ? Image(
+                                          image:
+                                              AssetImage('assets/shield.png'),
+                                        )
+                                      : food['verified'] == 'rejected'
+                                          ? Container(
+                                              height: 30,
+                                              child: Image(
+                                                image: AssetImage(
+                                                    'assets/reject.png'),
+                                              ),
+                                            )
+                                          : Image(
+                                              image: AssetImage(
+                                                  'assets/warning.png'),
+                                            )),
                               Container(
                                   padding: EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.greenAccent[700],
+                                    color: food['verified'] == 'rejected'
+                                        ? Colors.redAccent[700]
+                                        : Colors.greenAccent[700],
                                   ),
                                   margin: const EdgeInsets.only(left: 8.0),
-                                  child: Text(food['status'])),
+                                  child: food['verified'] == 'rejected'
+                                      ? Text(food['verified'])
+                                      : Text(food['status'])),
                             ],
                           ),
                           ExpandableShowMoreWidget(
