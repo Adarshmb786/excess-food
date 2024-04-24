@@ -241,7 +241,7 @@ class _AddProofState extends State<AddProof> {
                             showTopSnackBar(
                               Overlay.of(context),
                               CustomSnackBar.success(
-                                message: "Success. Food is uploaded",
+                                message: "Success. Proof is uploaded",
                               ),
                             );
                           },

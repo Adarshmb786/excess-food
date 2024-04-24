@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:excessfood/screen/admin/view_food.dart';
 import 'package:excessfood/screen/agent/order_food.dart';
 import 'package:excessfood/utils/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +36,7 @@ class OrdersBox extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => EvaluateFoodPage(
+                  builder: (context) => AdminEvaluateFoodPage(
                     food: food,
                   ),
                 ),
@@ -146,6 +147,65 @@ class OrdersBox extends StatelessWidget {
                             text: description,
                             height: 80,
                           ),
+                          FutureBuilder<DocumentSnapshot>(
+                            future: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(food['orderedBy'])
+                                .get(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else if (!snapshot.hasData ||
+                                  snapshot.data == null) {
+                                return Text('No data found');
+                              } else {
+                                final userData = snapshot.data!;
+                                final phoneNumber =
+                                    userData['phone'] ?? 'No phone number';
+                                return Text(
+                                  '🧑‍🍳 ${phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          FutureBuilder<DocumentSnapshot>(
+                            future: FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(food['userId'])
+                                .get(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else if (!snapshot.hasData ||
+                                  snapshot.data == null) {
+                                return Text('No data found');
+                              } else {
+                                final userData = snapshot.data!;
+                                final phoneNumber =
+                                    userData['phone'] ?? 'No phone number';
+                                return Text(
+                                  '🛒 ${phoneNumber}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                );
+                              }
+                            },
+                          )
                         ],
                       ),
                     ],

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:excessfood/screen/event/upload_food.dart';
+import 'package:excessfood/screen/login_screen.dart';
 import 'package:excessfood/screen/safety/view_posts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,8 @@ class _FoodSecIndexPageState extends State<FoodSecIndexPage> {
                 leading: Icon(Icons.logout),
                 title: Text('Logout'),
                 onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => loginscreen()));
                   FirebaseAuth.instance.signOut();
                 })
           ]),

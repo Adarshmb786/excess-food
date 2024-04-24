@@ -9,13 +9,21 @@ import 'package:provider/provider.dart';
 
 import 'auth/user_provider.dart';
 
-class IndexPage extends StatelessWidget {
+class IndexPage extends StatefulWidget {
   const IndexPage({super.key});
 
+  @override
+  State<IndexPage> createState() => _IndexPageState();
+}
+
+class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final userModel = userProvider.userModel;
+
+    if (!mounted) return Container();
+
     if (userModel!.type == "admin") {
       return const AdminIndexPage();
     } else {

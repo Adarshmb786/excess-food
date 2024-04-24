@@ -2,6 +2,7 @@
 
 import 'package:excessfood/screen/delivery/view_orders.dart';
 import 'package:excessfood/screen/delivery/view_posts.dart';
+import 'package:excessfood/screen/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_popup_menu/quds_popup_menu.dart';
@@ -34,6 +35,8 @@ class _DeliveryIndexPageState extends State<DeliveryIndexPage> {
                 leading: Icon(Icons.logout),
                 title: Text('Logout'),
                 onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => loginscreen()));
                   FirebaseAuth.instance.signOut();
                 })
           ]),

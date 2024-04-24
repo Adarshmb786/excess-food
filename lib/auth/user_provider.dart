@@ -10,6 +10,10 @@ class AuthenticationProvider extends ChangeNotifier {
     auth.authStateChanges().listen((user) {
       _user = user;
 
+      if (_user == null) {
+        userProvider.setUserModel(null);
+      }
+
       notifyListeners();
     });
   }
@@ -21,8 +25,10 @@ class UserProvider extends ChangeNotifier {
 
   model.UserModel? get userModel => _userModel;
 
-  void setUserModel(model.UserModel userModel) {
+  void setUserModel(model.UserModel? userModel) {
     _userModel = userModel;
     notifyListeners();
   }
 }
+
+final userProvider = UserProvider();

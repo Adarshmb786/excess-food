@@ -1,28 +1,23 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields, use_key_in_widget_constructors, avoid_print, library_private_types_in_public_api
-
-import 'dart:io';
+import 'package:excessfood/screen/agent/view_images.dart';
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class EvaluateFoodPage extends StatefulWidget {
+class AdminEvaluateFoodPage extends StatefulWidget {
   final Map<String, dynamic> food;
 
-  const EvaluateFoodPage({super.key, required this.food});
+  const AdminEvaluateFoodPage({Key? key, required this.food}) : super(key: key);
 
   @override
-  _EvaluateFoodPageState createState() => _EvaluateFoodPageState();
+  _AdminEvaluateFoodPageState createState() => _AdminEvaluateFoodPageState();
 }
 
-class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
+class _AdminEvaluateFoodPageState extends State<AdminEvaluateFoodPage> {
   final user = FirebaseAuth.instance.currentUser!;
 
   bool _isloading = false;
 
-  Future ApproveFood() async {
+  Future<void> orderFood() async {
     setState(() {
       _isloading = true;
     });
@@ -30,26 +25,8 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
 
     try {
       await firestore.collection('foods').doc(widget.food['postId']).update({
-        'verified': 'verified',
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-
-    setState(() {
-      _isloading = false;
-    });
-  }
-
-  Future RejectFood() async {
-    setState(() {
-      _isloading = true;
-    });
-    final FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-    try {
-      await firestore.collection('foods').doc(widget.food['postId']).update({
-        'verified': 'rejected',
+        'status': 'ordered',
+        'orderedBy': user.uid,
       });
     } catch (e) {
       print(e.toString());
@@ -64,7 +41,7 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Food Verification Page'),
+        title: Text('View Food'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -81,7 +58,7 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 10),
               Text(
                 widget.food['foodName'],
                 style: TextStyle(
@@ -105,12 +82,6 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              SizedBox(height: 10),
-              SizedBox(
-                height: 10,
-              ),
-              Text('Address'),
-              Text("${widget.food['address']}"),
               SizedBox(
                 height: 10,
               ),
@@ -178,81 +149,35 @@ class _EvaluateFoodPageState extends State<EvaluateFoodPage> {
                             fontWeight: FontWeight.w300,
                           ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        widget.food.containsKey('mainFoodimageUrl')
+                            ? Text(
+                                'Proof',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            : Text(''),
+                        widget.food.containsKey('mainFoodimageUrl')
+                            ? ViewImages(
+                                image1: widget.food['mainFoodimageUrl'],
+                                image2: widget.food['subPics'],
+                              )
+                            : Container(
+                                child: const Text(''),
+                              )
                       ],
                     );
                   }
                 },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      await ApproveFood();
-                      showTopSnackBar(
-                        Overlay.of(context),
-                        CustomSnackBar.success(
-                          message: "Success. Food is approved",
-                        ),
-                      );
-                      Navigator.of(context).pop();
-                    },
-                    child: _isloading
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.black,
-                            ),
-                          )
-                        : Center(
-                            child: const Text(
-                              'Approve ✔️',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await RejectFood();
-                      showTopSnackBar(
-                        Overlay.of(context),
-                        CustomSnackBar.error(
-                          message: "Success. Food is Rejected",
-                        ),
-                      );
-                      Navigator.of(context).pop();
-                    },
-                    child: _isloading
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.black,
-                            ),
-                          )
-                        : Center(
-                            child: const Text(
-                              'Reject ❌',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ),
-                  ),
-                ],
               ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class FirebaseApi {
-  static UploadTask? uploadFile(String destination, File file) {
-    try {
-      final ref = FirebaseStorage.instance.ref(destination);
-
-      return ref.putFile(file);
-    } on FirebaseException catch (e) {
-      print(e);
-    }
-    return null;
   }
 }
